@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Looney-DB: 邦訳DVD検索</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <div class="ly_body">
+    <header class="bl_head">
+      <h1>LOONEY-DB</h1>
+      <p>ルーニー・テューンズのDVDを検索できるサイトです。</p>
+    </header>
+    <!-- /.bl_head -->
+
+    <main class="ly_main">
+      <div class="bl_main_info">
+        <ol>
+          <li>DVD名・エピソードタイトルなどを入力して検索</li>
+          <li>ここに該当するタイトルの一覧が表示されます</li>
+        </ol>
+      </div>
+      <!-- /.bl_main_info -->
+      <div id="vueJson" class="ly_vueJson">
+        <input type="text" v-model="searchWord" class="textbox" placeholder="&#xf787; 検索" >
+        <!-- <button id="search_btn" v-on:click="onclick">検索</button> -->
+        <table class="ly_main_table bl_main_table">
+          <thead>
+            <th>収録タイトル</th>
+            <th>商品名</th>
+            <th>定価</th>
+            <th>DVDの枚数</th>
+            <th>本編</th>
+            <th>映像特典</th>
+            <th>JANコード</th>
+            <th>DVDの詳細</th>
+          </thead>
+          <tbody>
+            <tr v-for="searched in searchedData">
+              <td>
+                <span>
+                <p class="select_all">{{searched.episode_number}}.{{ searched.title_ja}}</p>
+                <p class="select_all">{{ searched.title_eng }}</p>
+                </span>
+              </td>
+              <td class="select_all">{{ searched.title }}</td>
+              <td>{{ searched.original_price }}円</td>
+              <td>{{ searched.disc_number }}枚</td>
+              <td>{{ searched.main_time }}分</td>
+              <td>{{ searched.bonus_time }}分</td>
+              <td id="dvd_jan" class="select_all">{{ searched.jan }}</td>
+              <td>
+                <button id="ex_btn" onclick= "openExplainPage()">詳細を見る</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- /#vueJson /.ly_table -->
+    </main>
+    <!-- /.ly_main -->
+
+  <div class="bl_footer">
+    <p><small>&copy; 2022 Engawa</small></p>
+  </div>
+  <!-- ./bl_footer -->
+
+</div>
+<!-- /.ly_body -->
+  
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="./js/script.js"></script>
+</body>
+</html>
+
